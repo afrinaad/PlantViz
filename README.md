@@ -8,10 +8,10 @@ PlantViz is a graphical viewer platform to display the retrieved results based o
 
 ## The PlantViz implementation
 
-#### The Plant Ontology UM (POUM): ‘poum.owl’ file (for Figure 1 in the manuscript)
+#### The Plant Ontology UM (POUM): ‘poum.owl’ file
 This file consists of annotated plant data on tree and shrub samples collected in University of Malaya. In the original ontology file we have approximately 129 samples and 43 species of 42 genus for trees and 93 samples and 31 species of 28 genus for shrubs. However, for the reviewing purposes, only 3 tree samples and 3 shrub samples are provided in this ontology. The images of 6 samples of trees and shrubs are provided in folder `images`.
 
-#### The images: ‘images’ folder (for Figure 2 in the manuscript)
+#### The images: ‘images’ folder
  There are 18 images in this folder.
 - Tree images
   1)	Delonix regia (DELREGO-B001.jpg, DELREGO-R001.jpg, DELREGO-T001.jpg)
@@ -26,7 +26,7 @@ This file consists of annotated plant data on tree and shrub samples collected i
 
 ---
 
-#### The PlantViz query page: `query.jsp` (for Figure 8 in the manuscript)
+#### The PlantViz query page: `query.jsp`
 There are three parameters which are ‘Scientific Name’, ‘Family Name’, and ‘Location’ provided in the PlantViz GUI. User has to select one of these parameters to send as a query.
 
 <span style="font-size:4em">*Snippet code from `query.jsp`*</span>
@@ -108,7 +108,7 @@ Gson gson = new Gson();
 }
 ```
 
-#### The PlantViz result page: ‘viewData.jsp’ (for Figure 9 and Figure 10 in the manuscript)
+#### The PlantViz result page: ‘viewData.jsp’
 The network graph is developed using `d3.js` library. D3 is a JavaScript library for visualizing data that involves the combination of SVG, HTML and CSS.
 
 JSON file named `plant.json` is read by d3.json and each nodes and links from JSON are assigned into variables `node` and `link` respectively. (For reference Figure 9)
@@ -200,7 +200,7 @@ More information on tools used in this project.
 * Jackson - https://github.com/FasterXML/jackson
 * D3.js - https://d3js.org/
 
-[flowchart]:https://github.com/afrinaad/plantviz/blob/master/reference/github%20-%20flowchart.png "PlantViz flowchart"
+[flowchart]:https://github.com/afrinaad/PlantViz/blob/master/img/github%20-%20flowchart.png "PlantViz flowchart"
 <span style="font-size:8px">**LAST UPDATED 25 Jan 2018**</span>
 
 
