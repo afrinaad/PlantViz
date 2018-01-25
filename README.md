@@ -137,7 +137,7 @@ d3.json("plant.json", function(error, json) {
           .call(force.drag)
  ```
 
-Interactivity is also added to encourage the communication between users and data. Images of plant are shown whenever the user hovers the cursor on the node containing plant scientific name. (For reference Figure 10)
+Interactivity is also added to encourage the communication between users and data. Images of plant are shown whenever the user hovers the cursor on the node containing plant scientific name. 
 ```
 .on("mouseover", function(d) {
 
@@ -197,10 +197,10 @@ More information on tools used in this project.
 
 * Eclipse IDE - https://eclipse.org/
 * SPARQL Query Language - https://www.w3.org/TR/rdf-sparql-query/
-* GSON - https://github.com/google/gson
+* Jackson - https://github.com/FasterXML/jackson
 * D3.js - https://d3js.org/
 
 [flowchart]:https://github.com/afrinaad/plantviz/blob/master/reference/github%20-%20flowchart.png "PlantViz flowchart"
-<span style="font-size:8px">**LAST UPDATED 25 May 2017**</span>
+<span style="font-size:8px">**LAST UPDATED 25 Jan 2018**</span>
 
 
