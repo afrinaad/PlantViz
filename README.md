@@ -11,7 +11,7 @@ PlantViz is a graphical viewer platform to display the retrieved results based o
 #### The Plant Ontology UM (POUM): ‘poum.owl’ file
 This file consists of annotated plant data on tree and shrub samples collected in University of Malaya. In the original ontology file we have approximately 129 samples and 43 species of 42 genus for trees and 93 samples and 31 species of 28 genus for shrubs. However, for the reviewing purposes, only 3 tree samples and 3 shrub samples are provided in this ontology. The images of 6 samples of trees and shrubs are provided in folder `images`.
 
-#### The images: ‘images’ folder
+#### The images: ‘psimg’ folder (dir: PlantViz/img/psimg)
  There are 18 images in this folder.
 - Tree images
   1)	Delonix regia (DELREGO-B001.jpg, DELREGO-R001.jpg, DELREGO-T001.jpg)
@@ -24,7 +24,6 @@ This file consists of annotated plant data on tree and shrub samples collected i
   2)	Dillenia suffruticosa (DILSUFO-B001.jpg, DILSUFO-R001.jpg, DILSUFO-L001.jpg)
   3)	Allamanda cathartica (ALLCATO-B001.jpg, ALLCATO-R001.jpg, ALLCATO-T001.jpg)
 
----
 
 #### The PlantViz query page: `query.jsp`
 There are three parameters which are ‘Scientific Name’, ‘Family Name’, and ‘Location’ provided in the PlantViz GUI. User has to select one of these parameters to send as a query.
@@ -46,10 +45,10 @@ There are three parameters which are ‘Scientific Name’, ‘Family Name’, a
 </form>	
 ```
 	
-The PlantViz search engine: `dataQuery` servlet
+The PlantViz search engine: `queryD` servlet
 SPARQL query is almost similar to each other.The only difference is only on `FILTER` command as shown below.
 
-<span style="font-size:4em">*Snippet code from `dataQuery` servlet*</span>
+<span style="font-size:4em">*Snippet code from `queryD` servlet*</span>
 
 If variable `optdata` equals to `Scientific Name` : `FILTER (?scname = \"" + dataquery1 + "\")`
   
@@ -57,55 +56,36 @@ If variable `optdata` equals to `Family Name` : `FILTER (?fname = \"" + dataquer
   
 If variable `optdata` equals to `Location` : `FILTER (?loc = \"" + dataquery1 + "\")`
 
-The result is then stored as an array data type named `resultlist`.
+The result is then stored as HashMap named `result` and added into another HashMap named `fr`.
 ```
-//get result into array resultlist
-if (plantName != null) {
-	resultlist.add(scientificName.toString());
-  resultlist.add(plantName.toString());
-  resultlist.add(familyName.toString());
-  resultlist.add(sample);
-	resultlist.add(plantLoc.toString());
-	resultlist.add(classDesc.toString());
-  
-	resultlist.add(pdTree);
-  resultlist.add(dtreeHeight.toString());
-  
-	resultlist.add(pdFlo);
-  resultlist.add(dflowerType.toString());					
-  resultlist.add(dflowerColor.toString());
-```
-
-Array `resultlist` is then stored into 2 lists data type named `nodes` and `links` for JSON file. 
-```
-List<PlantArray> nodes = new ArrayList<>();
-
-for (int d = 0; d < resultlist.size(); d = d + 49) {			
-//general info
-for (int a = d; a < d+5; a++) {
-nodes.add(new PlantArray(resultlist.get(a),1));
-}
-...
-List<PlantLink> links = new ArrayList<>();
-
-for (int d = 0; d < resultlist.size(); d = d + 49) {
-//general	
-for (int a = 0; a < d+6; a++) {
-	links.add(new PlantLink(a,d,10));
-	}
+	//put result into HashMap result
+	result.put("id",id);
+	result.put("plantname",plantname);
+	result.put("scname",scname);
+	result.put("imgfile", imgfile);
+	result.put("genus",genus);
+	result.put("family",family);
+	result.put("order", order);
+	result.put("gps",gps);
+	result.put("coverage",coverage);
+	
+	...
+	
+	fr.put(i,result);
 ```
 
-JSON file is then created and stored in folder `WebContent`
+HashMap `result` is then serialized into JSON format string named `answerJSON`. 
+```
+	getJSON getjson = new getJSON();
+	String answerJSON = getjson.writeJSON(optdata, fr);
+```
+
+HashMap `result` and string `answerJSON` is passed to `viewData.jsp`.
 
 ```
-PlantList answer = new PlantList(nodes, links);
-Gson gson = new Gson();
-	String plant = gson.toJson(answer);
-	System.out.println("plantJSON = " + plant);
-		
-	try (FileWriter file = new FileWriter("c:/users/user/workspace/plantont/WebContent/plant.json")) {
-			file.write(plant);
-}
+	request.setAttribute("fr", fr);
+	request.setAttribute("answerJSON", answerJSON);
+	nextJSP = "/viewData.jsp";
 ```
 
 #### The PlantViz result page: ‘viewData.jsp’
@@ -190,6 +170,9 @@ function connectedNodes() {
   }
 }
 ```
+<br><br>
+
+***NOTE : These source codes are uploaded in the `Source codes` folder (dir: PlantViz/Source code)***
 
 ## How-To Run PlantViz
 
