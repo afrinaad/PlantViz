@@ -191,6 +191,11 @@ function connectedNodes() {
 }
 ```
 
+## How-To Run PlantViz
+
+1. Read 'Tomcat Server Setup' to setup Java environment and Apache Tomcat server in your computer. 
+2. Read 'Deployment of plantviz.war' to start running PlantViz in the localhost of Tomcat server.
+
 ## References
 
 More information on tools used in this project.
