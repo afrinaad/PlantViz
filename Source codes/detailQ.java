@@ -21,11 +21,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
-
-
-
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -38,16 +33,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 
 import poum.getJSON;
-
-
-
-
-
-
-
-
-
-
 
 //Jena
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -117,9 +102,6 @@ public class detailQ extends HttpServlet {
 		
 		StringBuffer queryStr = new StringBuffer();
 		
-		//get poum.owl file from 10.3.204.173 server
-		//InputStream in = FileManager.get().open("http://10.33.204.173:8080/plantviz/ont/poum.owl");
-		
 		//get poum.owl file from localhost server
 		InputStream in = FileManager.get().open("http://localhost:8080/plantviz/ont/poum.owl");	
 		
@@ -127,7 +109,7 @@ public class detailQ extends HttpServlet {
 		//InputStream in = FileManager.get().open("C:/Users/User/workspace/poum/ontology/poum.owl");
 
 		//read owl file
-		podb.read(in, "http://10.33.204.173:8080/plantdb/ontology/plantont");
+		podb.read(in, "http://localhost:8080/plantdb/ontology/plantont");
 
 		//get queryscname from d.scname in viewData.jsp
 		String queryscname = "";

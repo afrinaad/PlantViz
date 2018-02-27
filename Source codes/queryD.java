@@ -23,8 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-
-
 //servlet
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,8 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-
-
 
 //Jena
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -110,18 +106,14 @@ public class queryD extends HttpServlet {
 		
 		StringBuffer queryStr = new StringBuffer();
 		
-		//get poum.owl file from 10.3.204.173 server
-		//InputStream in = FileManager.get().open("http://10.33.204.173:8080/plantviz/ont/poum.owl");
-		
 		//get poum.owl file from localhost server
 		InputStream in = FileManager.get().open("http://localhost:8080/plantviz/ont/poum.owl");
-				
-		
+					
 		//get poum.owl from computer (if server is not available)
 		//InputStream in = FileManager.get().open("C:/Users/User/workspace/poum/ontology/poum.owl");
 
 		//read owl file
-		podb.read(in, "http://10.33.204.173:8080/plantdb/ontology/plantont");
+		podb.read(in, "http://localhost:8080/plantdb/ontology/plantont");
 
 		
 		System.out.println("podb : " + podb);
@@ -146,7 +138,7 @@ public class queryD extends HttpServlet {
 		}
 		
 		//start SPARQL query
-		queryStr.append("PREFIX podb" + ": <" + "http://10.33.204.173:8080/plantdb/ontology/plantont#" + "> ");
+		queryStr.append("PREFIX podb" + ": <" + "http://localhost:8080/plantdb/ontology/plantont#" + "> ");
 		queryStr.append("PREFIX rdfs" + ": <" + "http://www.w3.org/2000/01/rdf-schema#" + ">");
 		queryStr.append("PREFIX rdf" + ": <" + "http://www.w3.org/1999/02/22-rdf-syntax-ns#" + ">");
 		
